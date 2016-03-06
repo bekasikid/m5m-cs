@@ -1,0 +1,69 @@
+<section class="content-header">
+    <h1>
+        Bayar
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Bayar</a></li>
+        <li><a href="#">Form</a></li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row" ng-controller="paymentCtrl">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-body">
+                    <form role="form" action="https://pay.doku.com/Suite/Receive" method="post" id="formBayar"> <!--production -->
+                    <!--<form role="form" action="http://staging.doku.com/Suite/Receive" method="post" id="formBayar"> &lt;!&ndash;development&ndash;&gt;-->
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">No Register</label>
+                                <input type="text" class="form-control" placeholder="No Pendaftaran" name="SESSIONID" ng-model="id">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Name</label>
+                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Name" name="NAME">
+                                <input type="hidden" name="MALLID" value="{{register.mallid}}">
+                                <input type="hidden" name="CHAINMERCHANT" value="{{register.chainmerchant}}">
+                                <input type="hidden" name="AMOUNT" value="{{register.amount}}">
+                                <input type="hidden" name="PURCHASEAMOUNT" value="{{register.purchaseamount}}">
+                                <input type="hidden" name="TRANSIDMERCHANT" value="{{register.transidmerchant}}">
+                                <input type="hidden" name="WORDS" value="{{register.words}}">
+                                <input type="hidden" name="REQUESTDATETIME" value="{{register.requestdatetime}}">
+                                <input type="hidden" name="CURRENCY" value="{{register.currency}}">
+                                <input type="hidden" name="PURCHASECURRENCY" value="{{register.currency}}">
+                                <input type="hidden" name="BASKET" value="{{register.basket}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" name="EMAIL">
+                            </div>
+                            <div class="form-group">
+                                <label>Pembayaran</label>
+                                <select class="form-control" ng-model="method" name="PAYMENTCHANNEL">
+                                    <option value="15">Credit Card</option>
+                                    <option value="05">Permata</option>
+                                    <option value="04">Doku Wallet</option>
+                                    <option value="14">Alfamart</option>
+                                </select>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Check me out
+                                </label>
+                            </div>
+                        </div><!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <button type="button" ng-click="getData()" class="btn btn-primary">Minta Data</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $.AdminLTE.layout.fix()
+</script>
+

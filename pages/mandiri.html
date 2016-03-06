@@ -1,0 +1,125 @@
+
+<section class="content-header">
+    <h1>
+        Mandiri
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Mandiri</a></li>
+        <li><a href="#">List</a></li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row" ng-controller="mandiriCtrl">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">&nbsp;</h3>
+                    <div class="">
+                        <table class="table table-borderless table-responsive table-search">
+                            <tbody>
+                            <tr>
+                                <td>Tanggal <br /> <input type="text" ng-model="search.tgl" placeholder="Tanggal"/></td>
+                                <td>Nominal <br /> <input type="text" ng-model="search.nominal" placeholder="Nama"/></td>
+                                <td style="text-align: right;">
+                                    <button class="btn btn-primary" ng-click="loadData(1)">Cari</button>
+                                    <button class="btn btn-primary" ng-click="tambah()">Tambah</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-responsive table-data">
+                        <thead>
+                        <tr>
+                            <th>
+                                ID
+                                <i class="fa fa-sort pointing" ng-click="sortir('id','asc')"
+                                   ng-if="sort.id.asc==0 && sort.id.desc==0"></i>
+                                <i class="fa fa-sort-asc pointing" ng-click="sortir('id','asc')"
+                                   ng-if="sort.id.asc==1"></i>
+                                <i class="fa fa-sort-desc pointing" ng-click="sortir('id','desc')"
+                                   ng-if="sort.id.desc==1"></i>
+                            </th>
+                            <th>
+                                Tanggal
+                                <i class="fa fa-sort pointing" ng-click="sortir('tgl','asc')"
+                                   ng-if="sort.tgl.asc==0 && sort.tgl.desc==0"></i>
+                                <i class="fa fa-sort-asc pointing" ng-click="sortir('tgl','asc')"
+                                   ng-if="sort.tgl.asc==1"></i>
+                                <i class="fa fa-sort-desc pointing" ng-click="sortir('tgl','desc')"
+                                   ng-if="sort.tgl.desc==1"></i>
+                            </th>
+                            <th>
+                                Nominal
+                                <i class="fa fa-sort pointing" ng-click="sortir('nominal','asc')"
+                                   ng-if="sort.nominal.asc==0 && sort.nominal.desc==0"></i>
+                                <i class="fa fa-sort-asc pointing" ng-click="sortir('nominal','asc')"
+                                   ng-if="sort.nominal.asc==1"></i>
+                                <i class="fa fa-sort-desc pointing" ng-click="sortir('nominal','desc')"
+                                   ng-if="sort.nominal.desc==1"></i>
+                            </th>
+                            <th>
+                                Keterangan
+                            </th>
+                            <th>
+                                No KTP
+                            </th>
+                            <th>
+                                Nama
+                            </th>
+                            <th>
+                                No Reg
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="mandiri in mandiris">
+                            <td>{{mandiri.mandiri_id}}</td>
+                            <td>{{mandiri.mandiri_datetime}}</td>
+                            <td>{{mandiri.mandiri_credit}}</td>
+                            <td>{{mandiri.mandiri_desc}}</td>
+                            <td>{{mandiri.registration_nik}}</td>
+                            <td>{{mandiri.registration_name}}</td>
+                            <td>{{mandiri.registration_code}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" items-per-page="limit" ng-change="loadData(0)" class="pagination-sm pull-right"
+                                boundary-links="true" boundary-link-numbers="true" rotate="true" num-pages="numPages" force-ellipses="true"></uib-pagination>
+                </div>
+                <div>
+                    <script type="text/ng-template" id="mandiriContent.html">
+                        <div class="modal-header">
+                            Input Mutasi
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Tanggal</label>
+                                <input type="text" placeholder="Tanggal" auto-close="true" date-time min-view="date" id="inputDueDate" class="form-control" view="date" ng-model="$root.mandiri.tgl" format="yyyy-MM-dd">
+                            </div>
+                            <div class="form-group">
+                                <label>Nominal</label>
+                                <input type="text" ng-model="$root.mandiri.nominal" placeholder="Nominal" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Keterangan</label>
+                                <input type="text" ng-model="$root.mandiri.desc" placeholder="Keterangan" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="button" ng-click="simpan()">Ok</button>
+                            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                        </div>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $.AdminLTE.layout.fix()
+</script>
+

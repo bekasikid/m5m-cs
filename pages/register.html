@@ -1,0 +1,52 @@
+<section class="content-header">
+    <h1>
+        Status
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Bayar</a></li>
+        <li><a href="#">Status</a></li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row" ng-controller="confirmCtrl">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-body">
+                    <form role="form">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label>No Register</label>
+                                <input type="text" class="form-control" placeholder="No Pendaftaran" name="SESSIONID" ng-model="register.id">
+                            </div>
+                            <div class="form-group">
+                                <label>AMOUNT</label>
+                                <input type="text" class="form-control" placeholder="No Pendaftaran" name="SESSIONID" ng-model="register.amount">
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <input type="text" class="form-control" placeholder="No Pendaftaran" name="SESSIONID" ng-model="register.status">
+                            </div>
+                            <div class="form-group">
+                                <label>payment code</label>
+                                <input type="text" class="form-control" placeholder="No Pendaftaran" name="SESSIONID" ng-model="register.code">
+                            </div>
+                            <div class="form-group">
+                                <label>payment code</label>
+                                <span ng-if="register.status==5511">
+                                    Tunggu Pembayaran
+                                </span>
+                                <span ng-if="register.status=='0000'">
+                                    Lunas
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $.AdminLTE.layout.fix()
+</script>
+

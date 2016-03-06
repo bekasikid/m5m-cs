@@ -1,0 +1,251 @@
+<style>
+    @media only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px) {
+        table.table-data td:nth-of-type(1):before {
+            content: "ID";
+        }
+
+        table.table-data td:nth-of-type(2):before {
+            content: "No KTP";
+        }
+
+        table.table-data td:nth-of-type(3):before {
+            content: "Nama";
+        }
+
+        table.table-data td:nth-of-type(4):before {
+            content: "Phone";
+        }
+
+        table.table-data td:nth-of-type(5):before {
+            content: "Email";
+        }
+
+        table.table-data td:nth-of-type(6):before {
+            content: "Outlet";
+        }
+
+        table.table-data td:nth-of-type(7):before {
+            content: "Tanggal";
+        }
+
+        table.table-data td:nth-of-type(8):before {
+            content: "Status";
+        }
+        table.table-data td:nth-of-type(9):before {
+            content: "Action";
+        }
+
+        table.table-search td:nth-of-type(1):before {
+            content: "ID";
+        }
+
+        table.table-search td:nth-of-type(2):before {
+            content: "No KTP";
+        }
+
+        table.table-search td:nth-of-type(3):before {
+            content: "Nama";
+        }
+
+        table.table-search td:nth-of-type(4):before {
+            content: "Phone";
+        }
+
+        table.table-search td:nth-of-type(5):before {
+            content: "Email";
+        }
+
+    }
+</style>
+<section class="content-header">
+    <h1>
+        Pendaftar
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Peserta</a></li>
+        <li><a href="#">List</a></li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row" ng-controller="daftarCtrl">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">&nbsp;</h3>
+                    <div class="">
+                        <table class="table table-borderless table-responsive table-search">
+                            <tbody>
+                            <tr>
+                                <td>ID <br /> <input type="text" ng-model="search.id" placeholder="ID"/></td>
+                                <td>No KTP <br /> <input type="text" ng-model="search.nik" placeholder="No KTP"/></td>
+                                <td>Nama <br /> <input type="text" ng-model="search.nama" placeholder="Nama"/></td>
+                                <td>Phone <br /> <input type="text" ng-model="search.phone" placeholder="Phone"/></td>
+                                <td>Email <br /> <input type="text" ng-model="search.email" placeholder="Email"/></td>
+                                <td style="text-align: right;">
+                                    <button class="btn btn-primary" ng-click="loadData(1)">Cari</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table table-responsive table-data">
+                        <thead>
+                        <tr>
+                            <th>
+                                ID
+                                <i class="fa fa-sort pointing" ng-click="sortir('id','asc')"
+                                   ng-if="sort.id.asc==0 && sort.id.desc==0"></i>
+                                <i class="fa fa-sort-asc pointing" ng-click="sortir('id','asc')"
+                                   ng-if="sort.id.asc==1"></i>
+                                <i class="fa fa-sort-desc pointing" ng-click="sortir('id','desc')"
+                                   ng-if="sort.id.desc==1"></i>
+                            </th>
+                            <th>
+                                No KTP
+                                <i class="fa fa-sort pointing" ng-click="sortir('nik','asc')"
+                                   ng-if="sort.nik.asc==0 && sort.nik.desc==0"></i>
+                                <i class="fa fa-sort-asc pointing" ng-click="sortir('nik','asc')"
+                                   ng-if="sort.nik.asc==1"></i>
+                                <i class="fa fa-sort-desc pointing" ng-click="sortir('nik','desc')"
+                                   ng-if="sort.nik.desc==1"></i>
+                            </th>
+                            <th>
+                                Nama
+                                <i class="fa fa-sort pointing" ng-click="sortir('nama','asc')"
+                                   ng-if="sort.nama.asc==0 && sort.nama.desc==0"></i>
+                                <i class="fa fa-sort-asc pointing" ng-click="sortir('nama','asc')"
+                                   ng-if="sort.nama.asc==1"></i>
+                                <i class="fa fa-sort-desc pointing" ng-click="sortir('nama','desc')"
+                                   ng-if="sort.nama.desc==1"></i>
+                            </th>
+                            <th>
+                                Phone
+                                <i class="fa fa-sort pointing" ng-click="sortir('phone','asc')"
+                                   ng-if="sort.phone.asc==0 && sort.phone.desc==0"></i>
+                                <i class="fa fa-sort-asc pointing" ng-click="sortir('phone','asc')"
+                                   ng-if="sort.phone.asc==1"></i>
+                                <i class="fa fa-sort-desc pointing" ng-click="sortir('phone','desc')"
+                                   ng-if="sort.phone.desc==1"></i>
+                            </th>
+                            <th>
+                                Email
+                                <i class="fa fa-sort pointing" ng-click="sortir('email','asc')"
+                                   ng-if="sort.email.asc==0 && sort.email.desc==0"></i>
+                                <i class="fa fa-sort-asc pointing" ng-click="sortir('email','asc')"
+                                   ng-if="sort.email.asc==1"></i>
+                                <i class="fa fa-sort-desc pointing" ng-click="sortir('email','desc')"
+                                   ng-if="sort.email.desc==1"></i>
+                            </th>
+                            <th>Outlet</th>
+                            <th>Tanggal</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="peserta in pesertas">
+                            <td>{{peserta.registration_code}}</td>
+                            <td>{{peserta.registration_nik}}</td>
+                            <td>{{peserta.registration_name}}</td>
+                            <td>{{peserta.registration_phone}}</td>
+                            <td>{{peserta.registration_email}}</td>
+                            <td>{{peserta.store_name}}</td>
+                            <td>{{tanggal(peserta.competition_date)}}</td>
+                            <td>
+                                <label class="badge bg-warning" ng-if="peserta.registration_confirmation==0">Belum Konfirmasi</label>
+                                <label class="badge bg-blue" ng-if="peserta.registration_confirmation==1">Sudah Konfirmasi</label> <br />
+                                <label class="badge bg-warning" ng-if="peserta.registration_valid==0">Belum Valid</label>
+                                <label class="badge bg-blue" ng-if="peserta.registration_valid==1">Sudah Valid</label>
+                                <label class="badge bg-red" ng-if="peserta.registration_valid==2">Pendaftaran Hangus</label><br />
+                            </td>
+                            <td>
+                                <button class="btn btn-default" ng-click="open(peserta)">Detail</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" items-per-page="limit" ng-change="loadData(0)" class="pagination-sm pull-right"
+                                boundary-links="true" boundary-link-numbers="true" rotate="true" num-pages="numPages" force-ellipses="true"></uib-pagination>
+                </div>
+                <div>
+                    <script type="text/ng-template" id="myModalContent.html">
+                        <div class="modal-header">
+                            <h3 class="modal-title">{{$root.peserta.registration_code}} - {{$root.peserta.registration_name}}</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Lokasi</label>
+                                <span class="form-control">{{$root.peserta.store_name}}, tanggal {{$root.peserta.competition_date}}, sesi {{$root.peserta.competition_session}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal</label>
+                                <input type="text" placeholder="Tanggal" auto-close="true" date-time min-view="date" id="inputDueDate" class="form-control" view="date" ng-model="$root.pindah.date" format="yyyy-MM-dd">
+                            </div>
+                            <div class="form-group">
+                                <label>Registration Fee</label>
+                                <span class="form-control">{{$root.peserta.registration_fee | currency : "Rp. ":0}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Daftar</label>
+                                <span class="form-control">{{$root.peserta.registration_date}}</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Tanggal Tiket</label>
+                                <span class="form-control">{{$root.peserta.ticket_senddate}}</span>
+                            </div>
+                            <div class="form-group" ng-if="$root.peserta.method_id!=2 && $root.peserta.registration_valid!=1 && $root.peserta.registration_valid!=3 && $root.peserta.registration_confirmation==1 && $root.user.role=='admin'">
+                                <label>Mandiri</label>
+                                <select ng-model="$root.selectedItem" class="form-control" ng-change="rubah()" ng-keypress="rubah()" style="font-size: 16px;">
+                                    <option ng-repeat="baris in $root.mandiris" value="{{baris.mandiri_id}}">{{baris.mandiri_credit | currency : "Rp. " : 0}}, tanggal {{baris.mandiri_datetime}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group" ng-if="$root.peserta.method_id!=2 && $root.peserta.registration_valid!=1 && $root.peserta.registration_valid!=3 && $root.peserta.registration_confirmation==1 && $root.user.role=='admin' ">
+                                <label>Keterangan</label>
+                                <span class="form-control" style="height: 50px;">{{$root.mandiri.mandiri_desc}}</span>
+                            </div>
+                            <div class="form-group" ng-if="peserta.registration_confirmation==0 && $root.user.role=='admin'">
+                                <label>Konfirmasi</label>
+                                <select ng-model="$root.metode" class="form-control" ng-change="rubah()" ng-keypress="rubah()">
+                                    <option value="1">Voucher</option>
+                                    <option value="2">Doku</option>
+                                    <option value="4">Mandiri</option>
+                                </select>
+                            </div>
+                            <div class="form-group" ng-if="$root.metode==1 && $root.user.role=='admin' ">
+                                <label>Kode Voucher</label>
+                                <input type="text" class="form-control" ng-model="$root.voucher" placeholder="Voucher"/>
+                            </div>
+                            <div class="form-group" ng-if="$root.metode==1" && $root.user.role=='admin'>
+                                <label>Kode Struk KFC</label>
+                                <input type="text" class="form-control" ng-model="$root.reffno" placeholder="Kode Struk KFC"/>
+                            </div>
+                            <div class="form-group" ng-if="peserta.method_id!=2">
+                                <label>Status</label><br/>
+                                <label class="badge bg-warning" ng-if="$root.peserta.registration_confirmation==0">Belum Konfirmasi</label>
+                                <label class="badge bg-blue" ng-if="$root.peserta.registration_confirmation==1">Sudah Konfirmasi</label> <br />
+                                <label class="badge bg-warning" ng-if="$root.peserta.registration_valid==0">Belum Valid</label>
+                                <label class="badge bg-blue" ng-if="$root.peserta.registration_valid==1">Sudah Valid</label>
+                                <label class="badge bg-red" ng-if="$root.peserta.registration_valid==2">Pendaftaran Hangus</label><br />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="button" ng-click="kirimTiket()" ng-if="$root.peserta.registration_valid==1">Kirim Ulang Tiket</button>
+                            <button class="btn btn-primary" type="button" ng-click="ok()" ng-if="$root.peserta.method_id!=2 && $root.peserta.registration_valid!=1 && $root.peserta.registration_valid!=3 && $root.peserta.registration_confirmation==1 && $root.user.role=='admin'">OK</button>
+                            <button class="btn btn-primary" type="button" ng-click="rubahJadwal()">Ganti Jadwal</button>
+                            <button class="btn btn-primary" type="button" ng-click="konfirmasi()" ng-if="$root.peserta.registration_confirmation==0 && $root.user.role=='admin'">Konfirmasi</button>
+                            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                        </div>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $.AdminLTE.layout.fix()
+</script>
+
